@@ -4,7 +4,7 @@ import (
 	"net/http"
 )
 
-func listing() error {
+func main() error {
 	var client *http.Client
 	var err error
 	if tracing {
