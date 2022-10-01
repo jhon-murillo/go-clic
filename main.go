@@ -1,6 +1,7 @@
 package main
 
 import (
+    "log"
     "github.com/hashicorp/go-retryablehttp"
 )
 
@@ -9,4 +10,5 @@ func main() {
     if err != nil {
     panic(err)
     }
+    log.Println(resp)
 }
