@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-func main() {
+func client() {
 	client := &http.Client{
 		Timeout: 5 * time.Second,
 		Transport: &http.Transport{
