@@ -2,7 +2,6 @@ package main
 
 import (
 	"log"
-        "client"
 	"github.com/hashicorp/go-retryablehttp"
 )
 
