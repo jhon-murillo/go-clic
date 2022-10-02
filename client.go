@@ -1,4 +1,4 @@
-package main
+package client
 
 import (
 	"net"
@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-func client() {
+func main() {
 	client := &http.Client{
 		Timeout: 5 * time.Second,
 		Transport: &http.Transport{
