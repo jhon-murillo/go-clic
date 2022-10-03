@@ -6,9 +6,22 @@ import (
 	"net/http"
 	"net/url"
 	"time"
+	"os"
+	"path/filepath"
 )
 
 func main() {
+	
+	if len(os.Args) != 2 {
+	    fmt.Printf("Usage: %s URL\n", filepath.Base(os.Args[0]))
+	}
+	URL := os.Args[1]
+	
+	u, err := url.ParseRequestURI(URL)
+	if err != nil {
+	    panic(err)
+	}
+	log.Printf("err=%+v url=%+v\n", err, u)
 	
 	client := &http.Client{
 		Timeout: 5 * time.Second,
@@ -20,12 +33,6 @@ func main() {
 			ResponseHeaderTimeout: time.Second,
 		},
 	}
-	
-	u, err := url.ParseRequestURI("https://golang.org/")
-	if err != nil {
-	    panic(err)
-	}
-	log.Printf("err=%+v url=%+v\n", err, u)
 	
 	resp, err := client.Get(u.String())
 	if err != nil {
