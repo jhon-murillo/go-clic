@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	var url *URL
+	var u *URL
 	var err error
 	
 	client := &http.Client{
@@ -23,13 +23,13 @@ func main() {
 		},
 	}
 	
-	url, err = url.ParseRequestURI("https://golang.org/")
+	u, err = url.ParseRequestURI("https://golang.org/")
 	if err != nil {
 	    panic(err)
 	}
-	log.Printf("err=%+v url=%+v\n", err, url)
+	log.Printf("err=%+v url=%+v\n", err, u)
 	
-	resp, err := client.Get(url)
+	resp, err := client.Get(u)
 	if err != nil {
 	    panic(err)
 	}
