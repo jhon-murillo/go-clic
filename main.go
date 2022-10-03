@@ -40,7 +40,7 @@ func main() {
 	}
 	
 	if resp.StatusCode != http.StatusOK {
-	    log.Printf(u, "Status code:", resp.StatusCode)
+		log.Printf(u.String(), "Status code:", resp.StatusCode)
 	}
 	
 	body, error := ioutil.ReadAll(resp.Body)
