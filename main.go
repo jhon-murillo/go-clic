@@ -32,4 +32,8 @@ func main() {
 	    panic(err)
 	}
 	log.Println(resp)
+	
+	if resp.StatusCode != http.StatusOK {
+	}
+	log.Printf("Status code:", resp.StatusCode)
 }
