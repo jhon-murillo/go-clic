@@ -43,7 +43,7 @@ func main() {
 		log.Printf(u.String(), "Status code:", resp.StatusCode)
 	}
 	
-	body, error := ioutil.ReadAll(resp.Body)
+	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 	    panic(err)
 	}
