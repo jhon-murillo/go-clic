@@ -37,10 +37,11 @@ func main() {
 	if err != nil {
 	    panic(err)
 	}
-	log.Println(resp)
+	log.Printf("Content Size:", resp.ContentLength)
 	
 	if resp.StatusCode != http.StatusOK {
+	    log.Printf("Status code:", resp.StatusCode)
 	}
-	log.Printf("Status code:", resp.StatusCode)
+	
 	defer resp.Body.Close()
 }
