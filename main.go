@@ -34,9 +34,3 @@ func main() {
 	}
 	log.Println(resp)
 }
-
-func isValidUri(uri string) bool {
-  _, err := url.ParseRequestURI(uri)
-
-  return err == nil
-}
