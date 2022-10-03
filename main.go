@@ -9,8 +9,6 @@ import (
 )
 
 func main() {
-	var u *URL
-	var err error
 	
 	client := &http.Client{
 		Timeout: 5 * time.Second,
@@ -23,7 +21,7 @@ func main() {
 		},
 	}
 	
-	u, err = url.ParseRequestURI("https://golang.org/")
+	u, err := url.ParseRequestURI("https://golang.org/")
 	if err != nil {
 	    panic(err)
 	}
