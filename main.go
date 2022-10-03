@@ -47,7 +47,7 @@ func main() {
 	if err != nil {
 	    panic(err)
 	}
-	log.Printf("Body Size:", body)
+	log.Printf("Body Size:", body.String())
 	
 	defer resp.Body.Close()
 }
