@@ -24,15 +24,14 @@ func main() {
 	}
 	
 	url, err = url.ParseRequestURI("https://golang.org/")
-		if err != nil {
-		panic(err)
+	if err != nil {
+	    panic(err)
 	}
-	log.Printf("err=%+v url=%+v\n", err, u)
-	
+	log.Printf("err=%+v url=%+v\n", err, url)
 	
 	resp, err := client.Get(url)
-		if err != nil {
-		panic(err)
+	if err != nil {
+	    panic(err)
 	}
 	log.Println(resp)
 }
