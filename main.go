@@ -16,8 +16,8 @@ func main() {
 	var URL string
 	
 	if len(os.Args) != 2 {
-	    fmt.Printf("Usage: %s URL\n", filepath.Base(os.Args[0]))
-	    URL = "google.com" 	
+	   fmt.Printf("Usage: %s URL\n", filepath.Base(os.Args[0]))
+	   panic(err) 	
 	}
 	
 	URL = os.Args[1]
