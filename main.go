@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	
 	"os"
 	"path/filepath"
 	"log"
@@ -13,15 +13,11 @@ import (
 )
 
 func main() {
-	var URL string
-	
 	if len(os.Args) != 2 {
-	   fmt.Printf("Usage: %s URL\n", filepath.Base(os.Args[0]))
-	   panic(err) 	
+	    log.Printf("Usage: %s URL\n", filepath.Base(os.Args[0]))
 	}
 	
-	URL = os.Args[1]
-	u, err := url.ParseRequestURI(URL)
+	u, err := url.ParseRequestURI(os.Args[1])
 	if err != nil {
 	    panic(err)
 	}
