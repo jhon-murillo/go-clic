@@ -27,7 +27,7 @@ func main() {
 	}
 	log.Printf("err=%+v url=%+v\n", err, u)
 	
-	resp, err := client.Get(u)
+	resp, err := client.Get(u.String())
 	if err != nil {
 	    panic(err)
 	}
