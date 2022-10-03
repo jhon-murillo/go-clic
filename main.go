@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"net/url"
 	"time"
+	"io/ioutil"
 
 )
 
@@ -37,11 +38,16 @@ func main() {
 	if err != nil {
 	    panic(err)
 	}
-	log.Printf("Content Size:", resp.ContentLength)
 	
 	if resp.StatusCode != http.StatusOK {
-	    log.Printf("Status code:", resp.StatusCode)
+	    log.Printf(u, "Status code:", resp.StatusCode)
 	}
 	
+	body, error := ioutil.ReadAll(resp.Body)
+	if err != nil {
+	    panic(err)
+	}
 	defer resp.Body.Close()
+	log.Printf("Body Size:", body)
+	
 }
