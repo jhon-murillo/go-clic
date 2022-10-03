@@ -21,7 +21,6 @@ func main() {
 	if err != nil {
 	    panic(err)
 	}
-	log.Printf("err=%+v url=%+v\n", err, u)
 	
 	client := &http.Client{
 		Timeout: 5 * time.Second,
@@ -43,4 +42,5 @@ func main() {
 	if resp.StatusCode != http.StatusOK {
 	}
 	log.Printf("Status code:", resp.StatusCode)
+	defer resp.Body.Close()
 }
