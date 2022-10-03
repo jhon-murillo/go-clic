@@ -4,6 +4,7 @@ import (
 	"log"
 	"net"
 	"net/http"
+	"net/url"
 	"time"
 )
 
@@ -20,9 +21,22 @@ func main() {
 		},
 	}
 	
+	u, err = url.ParseRequestURI("golang.org")
+		if err != nil {
+		panic(err)
+	}
+	log.Printf("err=%+v url=%+v\n", err, u)
+	
+	
 	resp, err := client.Get("https://golang.org/")
 		if err != nil {
 		panic(err)
 	}
 	log.Println(resp)
+}
+
+func isValidUri(uri string) bool {
+  _, err := url.ParseRequestURI(uri)
+
+  return err == nil
 }
