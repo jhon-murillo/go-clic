@@ -25,4 +25,4 @@ jobs:
       run: go build -v ./...
 
     - name: Test
-      run: ./go-clic https://www.elperiodic.com/
+      run: ./go-clic https://www.elperiodic.com/ https://www.burriana.es/
