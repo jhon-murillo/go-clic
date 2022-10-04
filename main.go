@@ -13,7 +13,7 @@ import (
 )
 
 func main() {
-        var u *url
+        var u *URL
 	var err error
 	
 	client := &http.Client{
