@@ -13,7 +13,9 @@ import (
 )
 
 func main() {
-
+        var u *url
+	var err error
+	
 	client := &http.Client{
 		Timeout: 5 * time.Second,
 		Transport: &http.Transport{
@@ -30,9 +32,9 @@ func main() {
 	}
 	
         for i, _ := range os.Args {
-		u, err := url.ParseRequestURI(os.Args[i])
+		u, err = url.ParseRequestURI(os.Args[i])
 	        if err != nil {
-	        panic(err)
+	            panic(err)
 		}
 	}
 	
