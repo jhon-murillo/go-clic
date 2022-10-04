@@ -13,9 +13,10 @@ import (
 )
 
 func main() {
-        var u *URL
+        
 	var err error
-	
+	u := &URL{
+	}
 	client := &http.Client{
 		Timeout: 5 * time.Second,
 		Transport: &http.Transport{
