@@ -9,21 +9,26 @@ import (
 	"net/http"
 	"net/url"
 	"time"
-	"bufio"
 )
 
 func main() {
-	var f *File
-	if len(os.Args) != 2 {
-	    f, err = os.OpenFile("url.list", os.O_RDWR|os.O_CREATE, 0755)
-		
+	
+	if len(os.Args) == 1 {
 	    log.Printf("Usage: %s URL\n", filepath.Base(os.Args[0]))
-		
-            if err = f.Close(); err != nil {
-		log.Fatal(err)
-	    }	
-	    
 	}
+	
+        for i=1, url := range os.Args {
+		u, err := url.ParseRequestURI(os.Args[i])
+	        if err != nil {
+	        panic(err)
+	}
+        
+        
+    }
+	
+	for i, element := range someSlice {
+   
+}
 	
 	u, err := url.ParseRequestURI(os.Args[1])
 	if err != nil {
