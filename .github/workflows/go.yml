@@ -2,9 +2,9 @@ name: Go
 
 on:
   push:
-    branches: [ "retryablehttp-w-actions" ]
+    branches: [ "url-array-input" ]
   pull_request:
-    branches: [ "retryablehttp-w-actions" ]
+    branches: [ "url-array-input" ]
 
 jobs:
 
