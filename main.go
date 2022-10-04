@@ -9,21 +9,11 @@ import (
 	"net/http"
 	"net/url"
 	"time"
+	"io/ioutil"
 )
 
 func main() {
-	
-	if len(os.Args) == 1 {
-	    log.Printf("Usage: %s URL\n", filepath.Base(os.Args[0]))
-	}
-	
-        for i, url := range os.Args {
-		u, err := url.ParseRequestURI(os.Args[i])
-	        if err != nil {
-	        panic(err)
-		}
-	}
-	
+
 	client := &http.Client{
 		Timeout: 5 * time.Second,
 		Transport: &http.Transport{
@@ -33,6 +23,17 @@ func main() {
 			TLSHandshakeTimeout:   time.Second,
 			ResponseHeaderTimeout: time.Second,
 		},
+	}
+	
+	if len(os.Args) == 1 {
+	    log.Printf("Usage: %s URL\n", filepath.Base(os.Args[0]))
+	}
+	
+        for i, _ := range os.Args {
+		u, err := url.ParseRequestURI(os.Args[i])
+	        if err != nil {
+	        panic(err)
+		}
 	}
 	
 	resp, err := client.Get(u.String())
