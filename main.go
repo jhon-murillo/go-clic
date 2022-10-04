@@ -32,14 +32,17 @@ func main() {
 	    log.Printf("Usage: %s URL\n", filepath.Base(os.Args[0]))
 	}
 	
-	for i, rawUrl := range os.Args[1:] {
+	for _, rawUrl := range os.Args[1:] {
+		
 		u, err = url.ParseRequestURI(rawUrl)
+		resp, err := client.Get(u.String())
+		
+		if err != nil {
+	    	panic(err)
+		}
         } 
 
-	resp, err := client.Get(u.String())
-	if err != nil {
-	    panic(err)
-	}
+
 	
 	if resp.StatusCode != http.StatusOK {
 		log.Printf(u.String(), "Status code:", resp.StatusCode)
