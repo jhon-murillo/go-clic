@@ -15,8 +15,8 @@ import (
 func main() {
         
 	var err error
-	u := &URL{
-	}
+	var u *URL
+	
 	client := &http.Client{
 		Timeout: 5 * time.Second,
 		Transport: &http.Transport{
@@ -32,13 +32,10 @@ func main() {
 	    log.Printf("Usage: %s URL\n", filepath.Base(os.Args[0]))
 	}
 	
-        for i, _ := range os.Args {
-		u, err = url.ParseRequestURI(os.Args[i])
-	        if err != nil {
-	            panic(err)
-		}
-	}
-	
+	for i, rawUrl := range os.Args[1:] {
+		u, err = url.ParseRequestURI(rawUrl)
+        } 
+
 	resp, err := client.Get(u.String())
 	if err != nil {
 	    panic(err)
