@@ -17,7 +17,7 @@ func main() {
 	    log.Printf("Usage: %s URL\n", filepath.Base(os.Args[0]))
 	}
 	
-        for i=1, url := range os.Args {
+        for i, url := range os.Args {
 		u, err := url.ParseRequestURI(os.Args[i])
 	        if err != nil {
 	        panic(err)
