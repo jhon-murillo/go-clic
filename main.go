@@ -1,99 +1,60 @@
 package main
 
 import (
-	"context"
-	"net/http"
-	"time"
-	"bufio"
-	"io"
+	
 	"os"
+	"path/filepath"
+	"log"
+	"net"
+	"net/http"
+	"net/url"
+	"time"
+	"io/ioutil"
 )
 
 func main() {
-	listing()
-	file, err := os.Open("main.go")
-	if err != nil {
-		panic(err)
+	
+	if len(os.Args) == 1 {
+	    log.Printf("Usage: %s URL\n", filepath.Base(os.Args[0]))
 	}
-	_, _ = countEmptyLines(file)
-}
-
-func countEmptyLines(reader io.Reader) (int, error) {
-	scanner := bufio.NewScanner(reader)
-	for scanner.Scan() {
-		// ...
-	}
-	return 0, nil
-}
-
-func listing() error {
-	var client *http.Client
+	
+	var u *url.URL
 	var err error
-	if tracing {
-		client, err = createClientWithTracing()
-	} else {
-		client, err = createDefaultClient()
-	}
-	if err != nil {
-		return err
-	}
-
-	_ = client
-	return nil
+	var resp *http.Response
+	
+	client := &http.Client{
+		Timeout: 5 * time.Second,
+		Transport: &http.Transport{
+			DialContext: (&net.Dialer{
+			 Timeout: time.Second,
+			}).DialContext,
+			TLSHandshakeTimeout:   time.Second,
+			ResponseHeaderTimeout: time.Second,
+			},
+		}
+	
+	for _, rawUrl := range os.Args[1:] {
+		
+		u, err = url.ParseRequestURI(rawUrl)
+		resp, err = client.Get(u.String())
+		
+		if err != nil {
+	    		panic(err)
+		}
+		
+		if resp.StatusCode != http.StatusOK {
+			log.Printf(u.String(), "Status code:", resp.StatusCode)
+		}
+		
+		body, err := ioutil.ReadAll(resp.Body)
+			
+		if err != nil {
+	    		panic(err)
+		}
+			
+		log.Printf("Body Size:", string(body))
+		
+        } 
+	
+	defer resp.Body.Close()
 }
-
-var tracing bool
-
-func createClientWithTracing() (*http.Client, error) {
-	return nil, nil
-}
-
-func createDefaultClient() (*http.Client, error) {
-	return nil, nil
-}
-
-func handler(w http.ResponseWriter, r *http.Request) {
-	response, err := doSomeTask(r.Context(), r)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	go func() {
-		err := publish(detach{ctx: r.Context()}, response)
-		// Do something with err
-		_ = err
-	}()
-
-	writeResponse(response)
-}
-
-type detach struct {
-	ctx context.Context
-}
-
-func (d detach) Deadline() (time.Time, bool) {
-	return time.Time{}, false
-}
-
-func (d detach) Done() <-chan struct{} {
-	return nil
-}
-
-func (d detach) Err() error {
-	return nil
-}
-
-func (d detach) Value(key any) any {
-	return d.ctx.Value(key)
-}
-
-func doSomeTask(context.Context, *http.Request) (string, error) {
-	return "", nil
-}
-
-func publish(context.Context, string) error {
-	return nil
-}
-
-func writeResponse(string) {}
