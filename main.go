@@ -10,7 +10,6 @@ import (
 	"net/url"
 	"time"
 	"io"
-	"sort"
 )
 
 func main() {
