@@ -10,6 +10,7 @@ import (
 	"net/url"
 	"time"
 	"io"
+	"sort"
 )
 
 func main() {
@@ -57,10 +58,12 @@ func main() {
 		size = append(size, len(body))
 			
 		log.Println(u, "Body Size (bytes): ", len(body))
-		log.Println(size)
+		log.Println(size, "Inside loop")
+		
 		
         } 
-	//log.Println("Body Size (bytes): ", sort.Ints(size))  
+	log.Println(size, "Outside loop")
+	log.Println("Body Size (bytes): ", sort.Ints(size))  
 	
 	defer resp.Body.Close()
 }
