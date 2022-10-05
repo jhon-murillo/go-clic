@@ -19,7 +19,7 @@ func main() {
 	    log.Println("Usage: %s URL", filepath.Base(os.Args[0]))
 	}
 	n := len(os.Args[1:]) 
-	size := make([]int, 3, n){-2, -1, 0}
+	size := make([]int, 3, n)
 	
 	var u *url.URL
 	var err error
@@ -57,11 +57,10 @@ func main() {
 		
 		size = append(size, len(body))
 			
-		log.Println(u, "Body Size (bytes): ", len(body))
-		
-		log.Println(u, "Body Size (bytes): ", sort.Ints(size))       
+		log.Println(u, "Body Size (bytes): ", len(body))     
 		
         } 
+	log.Println("Body Size (bytes): ", sort.Ints(size))  
 	
 	defer resp.Body.Close()
 }
