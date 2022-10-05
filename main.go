@@ -22,7 +22,8 @@ func main() {
 	var u *url.URL
 	var err error
 	var resp *http.Response
-	var s []int
+	
+	s := make([]int, 3, 6)
 	
 	client := &http.Client{
 		Timeout: 5 * time.Second,
