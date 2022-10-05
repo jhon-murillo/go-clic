@@ -60,9 +60,9 @@ func main() {
 		
 		if len(size) != 0 {
 			s = append(s, len(body))
-			log.Println(u, "Body Size (bytes): ", sort.Ints(s))
 		}
 	        
+		log.Println(u, "Body Size (bytes): ", sort.Ints(s))
         } 
 	
 	defer resp.Body.Close()
