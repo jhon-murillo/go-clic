@@ -18,13 +18,13 @@ func main() {
 	if len(os.Args) == 1 {
 	    log.Println("Usage: %s URL", filepath.Base(os.Args[0]))
 	}
+	n := len(os.Args[1:]) 
+	size := make([]int, 0, n)
 	
 	var u *url.URL
 	var err error
 	var resp *http.Response
-	
-	s := make([]int, 3, 6)
-	
+        
 	client := &http.Client{
 		Timeout: 5 * time.Second,
 		Transport: &http.Transport{
@@ -55,8 +55,8 @@ func main() {
 	    		panic(err)
 		}
 		
-		size := append(s, len(body))
-		
+		size = append(s, len(body))
+			
 		log.Println(u, "Body Size (bytes): ", len(body))
 		
 		log.Println(u, "Body Size (bytes): ", sort.Ints(size))       
