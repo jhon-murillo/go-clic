@@ -55,7 +55,7 @@ func main() {
 		
 		log.Println(u, "Body Size (bytes): ", len(body)) 
 		
-		size = append(size, len(body)
+		size = append(size, len(body))
 		sorted := sort.Ints(size)
 		
 	        log.Println(u, "Body Size (bytes): ", sorted)
