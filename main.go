@@ -22,7 +22,7 @@ func main() {
 	var u *url.URL
 	var err error
 	var resp *http.Response
-	var size []string
+	var size []int
 	
 	client := &http.Client{
 		Timeout: 5 * time.Second,
