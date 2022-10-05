@@ -19,7 +19,7 @@ func main() {
 	    log.Println("Usage: %s URL", filepath.Base(os.Args[0]))
 	}
 	n := len(os.Args[1:]) 
-	size := make([]int, 0, n)
+	size := make([]int, 3, n){-2, -1, 0}
 	
 	var u *url.URL
 	var err error
