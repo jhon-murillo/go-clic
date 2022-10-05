@@ -22,8 +22,8 @@ func main() {
 	var u *url.URL
 	var err error
 	var resp *http.Response
-	var size []int
 	
+	size := [1]int{0}
 	client := &http.Client{
 		Timeout: 5 * time.Second,
 		Transport: &http.Transport{
