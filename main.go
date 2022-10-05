@@ -62,6 +62,7 @@ func main() {
 		
         } 
 	log.Println(size)
+	
 	//log.Println("Body Size (bytes): ", sort.Ints(size))  
 	
 	defer resp.Body.Close()
