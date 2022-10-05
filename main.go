@@ -54,15 +54,14 @@ func main() {
 	    		panic(err)
 		}
 		
+		size = append(size, len(body))
+		
 		log.Println(u, "Body Size (bytes): ", len(body))
 		
-		s := append(size, len(body))
+		if size != 0 {
+			log.Println(u, "Body Size (bytes): ", sort.Ints(size))
+		}       
 		
-		if len(size) != 0 {
-			s = append(s, len(body))
-		}
-	        
-		log.Println(u, "Body Size (bytes): ", sort.Ints(s))
         } 
 	
 	defer resp.Body.Close()
