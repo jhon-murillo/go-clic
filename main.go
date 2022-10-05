@@ -52,7 +52,7 @@ func main() {
 	    		panic(err)
 		}
 		
-		log.Println("Body Size: ", len(body)) 
+		log.Println(u, "Body Size (bytes): ", len(body)) 
 		
 		
         } 
