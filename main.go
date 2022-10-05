@@ -9,7 +9,7 @@ import (
 	"net/http"
 	"net/url"
 	"time"
-	"io/ioutil"
+	"io"
 )
 
 func main() {
@@ -46,7 +46,7 @@ func main() {
 			log.Printf(u.String(), "Status code:", resp.StatusCode)
 		}
 		
-		body, err := ioutil.ReadAll(resp.Body)
+		body, err := io.ReadAll(resp.Body)
 			
 		if err != nil {
 	    		panic(err)
