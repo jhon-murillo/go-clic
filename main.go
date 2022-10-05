@@ -58,7 +58,7 @@ func main() {
 		
 		log.Println(u, "Body Size (bytes): ", len(body))
 		
-		if size != 0 {
+		if len(size) != 0 {
 			log.Println(u, "Body Size (bytes): ", sort.Ints(size))
 		}       
 		
