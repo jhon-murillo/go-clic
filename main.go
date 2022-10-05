@@ -15,7 +15,7 @@ import (
 func main() {
 	
 	if len(os.Args) == 1 {
-	    log.Printf("Usage: %s URL\n", filepath.Base(os.Args[0]))
+	    log.Println("Usage: %s URL", filepath.Base(os.Args[0]))
 	}
 	
 	var u *url.URL
@@ -43,7 +43,7 @@ func main() {
 		}
 		
 		if resp.StatusCode != http.StatusOK {
-			log.Printf(u.String(), "Status code:", resp.StatusCode)
+			log.Println (u.String(), "Status code: ", resp.StatusCode)
 		}
 		
 		body, err := io.ReadAll(resp.Body)
@@ -52,8 +52,7 @@ func main() {
 	    		panic(err)
 		}
 		
-		log.Printf("Body Size:", len(body)) 
-		// log.Printf("Body Size:", string(body))
+		log.Println("Body Size: ", len(body)) 
 		
 		
         } 
