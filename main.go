@@ -22,7 +22,7 @@ func main() {
 	var u *url.URL
 	var err error
 	var resp *http.Response
-	
+	size := []int
 	client := &http.Client{
 		Timeout: 5 * time.Second,
 		Transport: &http.Transport{
@@ -55,14 +55,8 @@ func main() {
 		
 		log.Println(u, "Body Size (bytes): ", len(body))
 		
-		size := []int
-		for _, s := range size {
-			size = append(size, len(body))
-			}
-	}
-		
 		size = append(size, len(body))
-		
+	
 	        log.Println(u, "Body Size (bytes): ", sort.Ints(size))
         } 
 	
