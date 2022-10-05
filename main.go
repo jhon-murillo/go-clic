@@ -46,14 +46,13 @@ func main() {
 			log.Printf(u.String(), "Status code:", resp.StatusCode)
 		}
 		
-		len(resp.Body) 
-		// body, err := io.ReadAll(resp.Body)
+		body, err := io.ReadAll(resp.Body)
 			
 		if err != nil {
 	    		panic(err)
 		}
 		
-		log.Printf("Body Size:", len(resp.Body)) 
+		log.Printf("Body Size:", len(body)) 
 		// log.Printf("Body Size:", string(body))
 		
 		
