@@ -58,9 +58,9 @@ func main() {
 		
 		log.Println(u, "Body Size (bytes): ", len(body))
 		
-		if len(size) >= 2 {
-			log.Println(u, "Body Size (bytes): ", sort.Ints(size))
-		}       
+		//if len(size) >= 2 {
+		//	log.Println(u, "Body Size (bytes): ", sort.Ints(size))
+		//}       
 		
         } 
 	
