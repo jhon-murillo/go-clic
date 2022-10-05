@@ -60,7 +60,7 @@ func main() {
 		log.Println(u, "Body Size (bytes): ", len(body))     
 		
         } 
-	log.Println("Body Size (bytes): ", sort.Ints(size))  
+	//log.Println("Body Size (bytes): ", sort.Ints(size))  
 	
 	defer resp.Body.Close()
 }
