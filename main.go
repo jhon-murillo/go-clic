@@ -55,7 +55,7 @@ func main() {
 	    		panic(err)
 		}
 		
-		size = append(s, len(body))
+		size = append(size, len(body))
 			
 		log.Println(u, "Body Size (bytes): ", len(body))
 		
