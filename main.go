@@ -72,7 +72,7 @@ func main() {
 	log.Println(size)
 	
 	sort.SliceStable(keys, func(i, j int) bool{
-        	return m[keys[i]] < basket[keys[j]]
+        	return m[keys[i]] < m[keys[j]]
     	})
 	
 	for _, k := range keys{
