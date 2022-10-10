@@ -63,13 +63,7 @@ func main() {
 		
 		size = append(size, len(body))
 		keys = append(keys, rawUrl)
-		
-		log.Println(u, "Body Size (bytes): ", len(body))
-		
-		
 	}
-	        
-	log.Println(size)
 	
 	sort.SliceStable(keys, func(i, j int) bool{
         	return m[keys[i]] < m[keys[j]]
@@ -78,10 +72,6 @@ func main() {
 	for _, k := range keys{
         	log.Println(k, m[k])
     	}
- 
-	log.Println("map: ", m) 
-	
-	//log.Println("Body Size (bytes): ", sort.Ints(size))  
 	
 	defer resp.Body.Close()
 }
