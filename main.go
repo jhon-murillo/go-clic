@@ -40,7 +40,8 @@ func main() {
 	for _, rawUrl := range os.Args[1:] {
 		
 		u, err = url.ParseRequestURI(rawUrl)
-		resp, err = client.Get(u.String())
+		URL = u.String()
+		resp, err = client.Get(URL)
 		
 		if err != nil {
 	    		panic(err)
@@ -59,16 +60,12 @@ func main() {
 		size = append(size, len(body))
 		log.Println(u, "Body Size (bytes): ", len(body))
 		
-		m[u.String()] = len(body)
-			
-		
-		
-		
-
-        } 
+		m[rawUrl] = len(body)
+	}
+	        
 	log.Println(size)
 	
-	log.Println("map: ", m[u.String()]) 
+	log.Println("map: ", m) 
 	
 	//log.Println("Body Size (bytes): ", sort.Ints(size))  
 	
