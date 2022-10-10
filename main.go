@@ -19,8 +19,7 @@ func main() {
 	if len(os.Args) == 1 {
 	    log.Println("Usage: %s URL", filepath.Base(os.Args[0]))
 	}
-	n := len(os.Args[1:]) 
-	size := make([]int, 0, n)
+	n := len(os.Args[1:])
 	keys := make([]string, 0, n)
 	m := make(map[string]int, n)
 	
@@ -60,8 +59,6 @@ func main() {
 		}
 		
 		m[rawUrl] = len(body)
-		
-		size = append(size, len(body))
 		keys = append(keys, rawUrl)
 	}
 	
