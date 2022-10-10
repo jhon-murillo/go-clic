@@ -20,6 +20,7 @@ func main() {
 	}
 	n := len(os.Args[1:]) 
 	size := make([]int, 0, n)
+	m := make(map[string]int, 0, n)
 	
 	var u *url.URL
 	var err error
@@ -56,10 +57,13 @@ func main() {
 		}
 		
 		size = append(size, len(body))
+		
+		m[u.String()] = append(m[u.String()], len(body))
 			
 		log.Println(u, "Body Size (bytes): ", len(body))
+		log.Println("map: ", m[u.String()]) 
 		
-		
+
         } 
 	log.Println(size)
 	
