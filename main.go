@@ -57,14 +57,18 @@ func main() {
 		}
 		
 		size = append(size, len(body))
+		log.Println(u, "Body Size (bytes): ", len(body))
+		
 		m[u.String()] = len(body)
 			
-		log.Println(u, "Body Size (bytes): ", len(body))
-		log.Println("map: ", m[u.String()]) 
+		
+		
 		
 
         } 
 	log.Println(size)
+	
+	log.Println("map: ", m[u.String()]) 
 	
 	//log.Println("Body Size (bytes): ", sort.Ints(size))  
 	
