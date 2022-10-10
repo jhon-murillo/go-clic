@@ -40,8 +40,8 @@ func main() {
 	for _, rawUrl := range os.Args[1:] {
 		
 		u, err = url.ParseRequestURI(rawUrl)
-		URL = u.String()
-		resp, err = client.Get(URL)
+	
+		resp, err = client.Get(u.String())
 		
 		if err != nil {
 	    		panic(err)
