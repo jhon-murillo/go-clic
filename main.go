@@ -20,7 +20,7 @@ func main() {
 	}
 	n := len(os.Args[1:]) 
 	size := make([]int, 0, n)
-	m := make(map[string]int, 0, n)
+	m := make(map[string]int, n)
 	
 	var u *url.URL
 	var err error
