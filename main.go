@@ -10,6 +10,7 @@ import (
 	"net/url"
 	"time"
 	"io"
+	"sort"
 	
 )
 
@@ -20,6 +21,7 @@ func main() {
 	}
 	n := len(os.Args[1:]) 
 	size := make([]int, 0, n)
+	keys := make([]string, 0, n)
 	m := make(map[string]int, n)
 	
 	var u *url.URL
@@ -57,14 +59,26 @@ func main() {
 	    		panic(err)
 		}
 		
+		m[rawUrl] = len(body)
+		
 		size = append(size, len(body))
+		keys = append(keys, rawUrl)
+		
 		log.Println(u, "Body Size (bytes): ", len(body))
 		
-		m[rawUrl] = len(body)
+		
 	}
 	        
 	log.Println(size)
 	
+	sort.SliceStable(keys, func(i, j int) bool{
+        	return m[keys[i]] < basket[keys[j]]
+    	})
+	
+	for _, k := range keys{
+        	log.Println(k, m[k])
+    	}
+ 
 	log.Println("map: ", m) 
 	
 	//log.Println("Body Size (bytes): ", sort.Ints(size))  
