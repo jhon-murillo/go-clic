@@ -65,11 +65,11 @@ func main() {
 		if err != nil {
 	    		panic(err)
 		}
-		
-		m[val] = len(body)
-		keys = append(keys, val)
 	    
 	    }(rawUrl)
+	
+	    m[rawUrl] = len(body)
+	    keys = append(keys, rawUrl)
 		
 
 	}
