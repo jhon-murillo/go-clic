@@ -42,9 +42,9 @@ func main() {
 			},
 		}
 	
-	for _, rawUrl := range os.Args[1:] {
+	for i, rawUrl := range os.Args[1:] {
 	
-	    go func() {
+	    go func(i int) {
 	    
 	    	defer wg.Done()
 		
@@ -69,7 +69,7 @@ func main() {
 		m[rawUrl] = len(body)
 		keys = append(keys, rawUrl)
 	    
-	    }
+	    }(i)
 		
 
 	}
