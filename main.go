@@ -44,11 +44,11 @@ func main() {
 	
 	for _, rawUrl := range os.Args[1:] {
 	
-	    go func(rawUrl string) {
+	    go func(val string) {
 	    
 	    	defer wg.Done()
 		
-		u, err = url.ParseRequestURI(rawUrl)
+		u, err = url.ParseRequestURI(val)
 	
 		resp, err = client.Get(u.String())
 		
@@ -66,8 +66,8 @@ func main() {
 	    		panic(err)
 		}
 		
-		m[rawUrl] = len(body)
-		keys = append(keys, rawUrl)
+		m[val] = len(body)
+		keys = append(keys, val)
 	    
 	    }(rawUrl)
 		
