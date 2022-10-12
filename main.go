@@ -5,6 +5,7 @@ import (
 	"os"
 	"path/filepath"
 	"log"
+	"sync"
 	"net"
 	"net/http"
 	"net/url"
@@ -23,6 +24,9 @@ func main() {
 	keys := make([]string, 0, n)
 	m := make(map[string]int, n)
 	
+	var wg sync.WaitGroup
+	wg.Add(n)
+	
 	var u *url.URL
 	var err error
 	var resp *http.Response
@@ -39,6 +43,10 @@ func main() {
 		}
 	
 	for _, rawUrl := range os.Args[1:] {
+	
+	    go func(rawUrl string) {
+	    
+	    	defer wg.Done()
 		
 		u, err = url.ParseRequestURI(rawUrl)
 	
@@ -60,7 +68,13 @@ func main() {
 		
 		m[rawUrl] = len(body)
 		keys = append(keys, rawUrl)
+	    
+	    }
+		
+
 	}
+	
+	wg.Wait()
 	
 	sort.SliceStable(keys, func(i, j int) bool{
         	return m[keys[i]] < m[keys[j]]
