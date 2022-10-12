@@ -44,7 +44,7 @@ func main() {
 	
 	for _, rawUrl := range os.Args[1:] {
 	
-	    go func(rawUrl string) {
+	    go func() {
 	    
 	    	defer wg.Done()
 		
