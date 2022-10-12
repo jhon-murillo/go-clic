@@ -19,7 +19,7 @@ jobs:
         go-version: 1.18
         
     - name: Build
-      run: go build -v ./...
+      run: go build -race -v ./...
 
     - name: Test
       run: ./go-clic https://go.dev/ https://www.youtube.com/ https://github.com
