@@ -67,10 +67,14 @@ func main() {
 	    	        panic(err)
 	    	    }
 		    
+		    mutex.Lock()
+		    m[val] = len(body)
+                    mutex.Unlock()
+		    
 		    
 				       
 	    }(rawUrl)
-	    m[rawUrl] = len(body)
+	    
 	    keys = append(keys, rawUrl)		
 	}
 	
