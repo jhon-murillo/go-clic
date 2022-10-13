@@ -29,8 +29,7 @@ func main() {
 	var u *url.URL
 	var err error
 	var resp *http.Response
-	var wg sync.WaitGroup
-        
+	
 	client := &http.Client{
 		Timeout: 5 * time.Second,
 		Transport: &http.Transport{
@@ -42,37 +41,54 @@ func main() {
 			},
 		}
 	
-	for _, rawUrl := range os.Args[1:] {
+	var wg sync.WaitGroup
+	ch := make(chan []byte, n)
+	wg.Add(n)
 	
-	    wg.Add(1)
+	
+	for _, rawUrl := range os.Args[1:] {
 	    
 	    go func(val string) {
 		    
 		    defer wg.Done()
+		    for b :=  range ch {
 		    
-		    u, err = url.ParseRequestURI(val)
-		    resp, err = client.Get(u.String())
+		        u, err = url.ParseRequestURI(val)
+		        resp, err = client.Get(u.String())
 		
-		    if err != nil {
-	    		    panic(err)
-		    }
+		        if err != nil {
+	    		        panic(err)
+		        }
 		
-		    if resp.StatusCode != http.StatusOK {
-			log.Println (u.String(), "Status code: ", resp.StatusCode)
-		    }
+		        if resp.StatusCode != http.StatusOK {
+			    log.Println (u.String(), "Status code: ", resp.StatusCode)
+		        }
 		    
-		    body, err = io.ReadAll(resp.Body) 
+		        body, err = io.ReadAll(resp.Body) 
 		    
-	    	    if err != nil {
-	    	        panic(err)
-	    	    }
+	    	        if err != nil {
+	    	            panic(err)
+	    	        }
 		    
-		    m[val] = len(body)
+		        m[val] = len(body)
 		    
-                    wg.Done()    
+                    }
 				       
 	    }(rawUrl)
-	    
+	    	for {
+		b := make([]byte, 1024)
+		_, err := r.Read(b)
+		if err != nil {
+			if err == io.EOF {
+				break
+			}
+			return 0, err
+		}
+		ch <- b
+	}
+
+	close(ch)
+	wg.Wait()
 	    keys = append(keys, rawUrl)		
 	}
 	
