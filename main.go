@@ -29,6 +29,7 @@ func main() {
 	var u *url.URL
 	var err error
 	var resp *http.Response
+	mutex := sync.Mutex{}
 	var wg sync.WaitGroup
         
 	client := &http.Client{
