@@ -6,6 +6,7 @@ import (
 	"path/filepath"
 	"log"
 	"sync"
+	"sync/atomic"
 	"net"
 	"net/http"
 	"net/url"
@@ -25,7 +26,8 @@ func main() {
 	body := make([]byte, 0, n)
 	m := make(map[string]int, n)
 	
-	var wg sync.WaitGroup
+	wg := sync.WaitGroup{}
+	ch := make(chan []byte, n)
 	wg.Add(n)
 	
 	var u *url.URL
@@ -49,32 +51,41 @@ func main() {
 	    
 	    	defer wg.Done()
 		
-		u, err = url.ParseRequestURI(val)
-	
-		resp, err = client.Get(u.String())
+		for b := range ch {
 		
-		if err != nil {
-	    		panic(err)
-		}
+		    u, err = url.ParseRequestURI(val)
+		    resp, err = client.Get(u.String())
 		
-		if resp.StatusCode != http.StatusOK {
+		    if err != nil {
+	    		    panic(err)
+		    }
+		
+		    if resp.StatusCode != http.StatusOK {
 			log.Println (u.String(), "Status code: ", resp.StatusCode)
-		}
-		       
+		    }
+		    
+		    body, err = io.ReadAll(resp.Body)
+			
+	    	    if err != nil {
+	    	        panic(err)
+	    	    }
+		    
+		    m[val] = len(body)
+	            keys = append(&keys, rawUrl)
+                }
+				       
 	    }(rawUrl)
 	
-	    body, err = io.ReadAll(resp.Body)
-			
-	    if err != nil {
-	    	panic(err)
-	    }
-		
-	    m[rawUrl] = len(body)
-	    keys = append(keys, rawUrl)
-		
 	}
-	
-	wg.Wait()
+    
+        for {
+            b := make([]byte, 1024)
+            // Read from r to b
+           ch <- b
+        }
+    
+        close(ch)
+        wg.Wait()
 	
 	sort.SliceStable(keys, func(i, j int) bool{
         	return m[keys[i]] < m[keys[j]]
