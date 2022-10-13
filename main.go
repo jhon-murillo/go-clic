@@ -60,19 +60,18 @@ func main() {
 		if resp.StatusCode != http.StatusOK {
 			log.Println (u.String(), "Status code: ", resp.StatusCode)
 		}
-		
-		body, err = io.ReadAll(resp.Body)
-			
-		if err != nil {
-	    		panic(err)
-		}
 		       
 	    }(rawUrl)
 	
+	    body, err = io.ReadAll(resp.Body)
+			
+	    if err != nil {
+	    	panic(err)
+	    }
+		
 	    m[rawUrl] = len(body)
 	    keys = append(keys, rawUrl)
 		
-
 	}
 	
 	wg.Wait()
