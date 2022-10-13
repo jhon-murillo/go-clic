@@ -68,11 +68,9 @@ func main() {
 	    	        panic(err)
 	    	    }
 		    
-		    mutex.Lock()
 		    m[val] = len(body)
-                    mutex.Unlock()
 		    
-		    
+                    wg.Done()    
 				       
 	    }(rawUrl)
 	    
