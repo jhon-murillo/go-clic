@@ -6,7 +6,6 @@ import (
 	"path/filepath"
 	"log"
 	"sync"
-	"sync/atomic"
 	"net"
 	"net/http"
 	"net/url"
@@ -71,7 +70,7 @@ func main() {
 	    	    }
 		    
 		    m[val] = len(body)
-	            keys = append(&keys, rawUrl)
+	            keys = append(keys, rawUrl)
                 }
 				       
 	    }(rawUrl)
