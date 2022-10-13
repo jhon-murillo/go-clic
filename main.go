@@ -22,6 +22,7 @@ func main() {
 	}
 	n := len(os.Args[1:])
 	keys := make([]string, 0, n)
+	body := make([]byte, 0, n)
 	m := make(map[string]int, n)
 	
 	var wg sync.WaitGroup
@@ -60,16 +61,15 @@ func main() {
 			log.Println (u.String(), "Status code: ", resp.StatusCode)
 		}
 		
-		body, err := io.ReadAll(resp.Body)
+		body, err = io.ReadAll(resp.Body)
 			
 		if err != nil {
 	    		panic(err)
 		}
-		    
-	        m[val] = len(body)
-		    
+		       
 	    }(rawUrl)
 	
+	    m[rawUrl] = len(body)
 	    keys = append(keys, rawUrl)
 		
 
