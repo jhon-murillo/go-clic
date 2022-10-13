@@ -25,13 +25,10 @@ func main() {
 	body := make([]byte, 0, n)
 	m := make(map[string]int, n)
 	
-	wg := sync.WaitGroup{}
-	ch := make(chan []byte, n)
-	wg.Add(n)
-	
 	var u *url.URL
 	var err error
 	var resp *http.Response
+	var wg sync.WaitGroup
         
 	client := &http.Client{
 		Timeout: 5 * time.Second,
@@ -45,13 +42,11 @@ func main() {
 		}
 	
 	for _, rawUrl := range os.Args[1:] {
-	
+	    wg.Add(1)
 	    go func(val string) {
-	    
-	    	defer wg.Done()
-		
-		for b := range ch {
-		
+		    
+		    defer wg.Done()
+		    
 		    u, err = url.ParseRequestURI(val)
 		    resp, err = client.Get(u.String())
 		
@@ -69,23 +64,19 @@ func main() {
 	    	        panic(err)
 	    	    }
 		    
+		    mutex.Lock()
+		    
 		    m[val] = len(body)
 	            keys = append(keys, rawUrl)
+		    
+		    mutex.Unlock()
                 }
 				       
 	    }(rawUrl)
 	
 	}
-    
-        for {
-            b := make([]byte, 1024)
-            // Read from r to b
-           ch <- b
-        }
-    
-        close(ch)
-        wg.Wait()
 	
+
 	sort.SliceStable(keys, func(i, j int) bool{
         	return m[keys[i]] < m[keys[j]]
     	})
