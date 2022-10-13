@@ -70,11 +70,11 @@ func main() {
 		    m[val] = len(body)
 				       
 	    }(rawUrl)
-	 
-	    keys = append(keys, rawUrl)
 	
+	    keys = append(keys, rawUrl)		
 	}
 	
+	wg.Wait()
 
 	sort.SliceStable(keys, func(i, j int) bool{
         	return m[keys[i]] < m[keys[j]]
