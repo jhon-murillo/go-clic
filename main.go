@@ -20,6 +20,7 @@ func main() {
 	if len(os.Args) == 1 {
 	    log.Println("Usage: %s URL", filepath.Base(os.Args[0]))
 	}
+	
 	n := len(os.Args[1:])
 	keys := make([]string, 0, n)
 	body := make([]byte, 0, n)
@@ -42,7 +43,9 @@ func main() {
 		}
 	
 	for _, rawUrl := range os.Args[1:] {
+	
 	    wg.Add(1)
+	    
 	    go func(val string) {
 		    
 		    defer wg.Done()
@@ -58,21 +61,17 @@ func main() {
 			log.Println (u.String(), "Status code: ", resp.StatusCode)
 		    }
 		    
-		    body, err = io.ReadAll(resp.Body)
-			
+		    body, err = io.ReadAll(resp.Body) 
+		    
 	    	    if err != nil {
 	    	        panic(err)
 	    	    }
 		    
-		    mutex.Lock()
-		    
 		    m[val] = len(body)
-	            keys = append(keys, rawUrl)
-		    
-		    mutex.Unlock()
-                }
 				       
 	    }(rawUrl)
+	 
+	    keys = append(keys, rawUrl)
 	
 	}
 	
