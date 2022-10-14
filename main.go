@@ -56,9 +56,9 @@ func main() {
 	            panic(err)
 	        }
                 size := len(body)
-	        log.Println(u , sort.Ints(size))
+	        log.Println(u , size)
 	    
-	    }(rawUrl)
+	    }(rawUrl, size)
 	}
 	wg.Wait()
 }
