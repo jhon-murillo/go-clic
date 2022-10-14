@@ -20,9 +20,7 @@ func main() {
 	    log.Println("Usage: %s URL", filepath.Base(os.Args[0]))
 	}
 	
-	var u *url.URL
 	var err error
-	var resp *http.Response
 	
 	client := &http.Client{
 		Timeout: 5 * time.Second,
@@ -45,8 +43,9 @@ func main() {
 	    
 	    	defer wg.Done()
 		
-	        u, err = url.ParseRequestURI(rawUrl)
-                resp, err = client.Get(u.String())
+		u, err := url.ParseRequestURI(rawUrl)
+		resp, err := client.Get(u.String())
+		
 	        if err != nil {
 	            panic(err)
 	        }
