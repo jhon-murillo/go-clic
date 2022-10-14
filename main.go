@@ -48,7 +48,8 @@ func main() {
 	    if err != nil {
 	        panic(err)
 	    }
-            size = len(body)   	
+            size = len(body)
+	    log.Println(u , size)
 	}
 	defer resp.Body.Close()
 }
