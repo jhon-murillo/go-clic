@@ -5,13 +5,11 @@ import (
 	"os"
 	"path/filepath"
 	"log"
-	"sync"
 	"net"
 	"net/http"
 	"net/url"
 	"time"
 	"io"
-	"sort"
 	
 )
 
@@ -37,7 +35,7 @@ func main() {
 		}
 	
 	for _, rawUrl := range os.Args[1:] {
-	    u, err = url.ParseRequestURI(val)
+	    u, err = url.ParseRequestURI(rawUrl)
             resp, err = client.Get(u.String())
 	    if err != nil {
 	        panic(err)
