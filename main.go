@@ -11,6 +11,7 @@ import (
 	"time"
 	"io"
 	"sync"
+	"sort"
 )
 
 func main() {
@@ -70,4 +71,14 @@ func main() {
 	    keys = append(keys, rawUrl)	
 	}
 	wg.Wait()
+	
+	sort.SliceStable(keys, func(i, j int) bool{
+        	return m[keys[i]] < m[keys[j]]
+    	})
+	
+	for _, k := range keys{
+        	log.Println(k, m[k])
+    	}
+	
+	defer resp.Body.Close()
 }
