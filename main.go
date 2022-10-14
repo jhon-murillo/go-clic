@@ -43,7 +43,7 @@ func main() {
 	    if resp.StatusCode != http.StatusOK {
 	        log.Println (u.String(), "Status code: ", resp.StatusCode)
 	    }
-	    body, err = io.ReadAll(resp.Body) 
+	    body, err := io.ReadAll(resp.Body) 
 	    if err != nil {
 	        panic(err)
 	    }
