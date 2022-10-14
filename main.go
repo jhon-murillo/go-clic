@@ -21,11 +21,6 @@ func main() {
 	    log.Println("Usage: %s URL", filepath.Base(os.Args[0]))
 	}
 	
-	n := len(os.Args[1:])
-	keys := make([]string, 0, n)
-	body := make([]byte, 0, n)
-	m := make(map[string]int, n)
-	
 	var u *url.URL
 	var err error
 	var resp *http.Response
@@ -41,66 +36,20 @@ func main() {
 			},
 		}
 	
-	var wg sync.WaitGroup
-	ch := make(chan []byte, n)
-	wg.Add(n)
-	
-	
 	for _, rawUrl := range os.Args[1:] {
-	    
-	    go func(val string) {
-		    
-		    defer wg.Done()
-		    for b :=  range ch {
-		    
-		        u, err = url.ParseRequestURI(val)
-		        resp, err = client.Get(u.String())
-		
-		        if err != nil {
-	    		        panic(err)
-		        }
-		
-		        if resp.StatusCode != http.StatusOK {
-			    log.Println (u.String(), "Status code: ", resp.StatusCode)
-		        }
-		    
-		        body, err = io.ReadAll(resp.Body) 
-		    
-	    	        if err != nil {
-	    	            panic(err)
-	    	        }
-		    
-		        m[val] = len(body)
-		    
-                    }
-				       
-	    }(rawUrl)
-	    	for {
-		b := make([]byte, 1024)
-		_, err := r.Read(b)
-		if err != nil {
-			if err == io.EOF {
-				break
-			}
-			return 0, err
-		}
-		ch <- b
+	    u, err = url.ParseRequestURI(val)
+            resp, err = client.Get(u.String())
+	    if err != nil {
+	        panic(err)
+	    }
+	    if resp.StatusCode != http.StatusOK {
+	        log.Println (u.String(), "Status code: ", resp.StatusCode)
+	    }
+	    body, err = io.ReadAll(resp.Body) 
+	    if err != nil {
+	        panic(err)
+	    }
+            len(body)   	
 	}
-
-	close(ch)
-	wg.Wait()
-	    keys = append(keys, rawUrl)		
-	}
-	
-	wg.Wait()
-
-	sort.SliceStable(keys, func(i, j int) bool{
-        	return m[keys[i]] < m[keys[j]]
-    	})
-	
-	for _, k := range keys{
-        	log.Println(k, m[k])
-    	}
-	
 	defer resp.Body.Close()
 }
