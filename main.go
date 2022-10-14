@@ -23,7 +23,6 @@ func main() {
 	var u *url.URL
 	var err error
 	var resp *http.Response
-	var size int
 	
 	client := &http.Client{
 		Timeout: 5 * time.Second,
@@ -58,7 +57,7 @@ func main() {
 	        if err != nil {
 	            panic(err)
 	        }
-                size = len(body)
+                size := len(body)
 	        log.Println(u , size)
 	    
 	    }(rawUrl)
