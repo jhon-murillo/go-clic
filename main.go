@@ -32,6 +32,10 @@ func main() {
 	
 	var wg sync.WaitGroup
 	
+	n := len(os.Args[1:])
+	keys := make([]string, 0, n)
+	m := make(map[string]int, n)
+	
 	for _, rawUrl := range os.Args[1:] {
 	
 	    wg.Add(1)	
