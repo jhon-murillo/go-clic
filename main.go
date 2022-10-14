@@ -11,6 +11,7 @@ import (
 	"time"
 	"io"
 	"sync"
+	"sort"
 	
 )
 
@@ -55,7 +56,7 @@ func main() {
 	            panic(err)
 	        }
                 size := len(body)
-	        log.Println(u , size)
+	        log.Println(u , sort.Ints(size))
 	    
 	    }(rawUrl)
 	}
