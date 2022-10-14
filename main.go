@@ -60,7 +60,6 @@ func main() {
 	            panic(err)
 	        }
                 size := len(body)
-	        log.Println(u , size)
 		
 		mutex.Lock()    
 		m[rawUrl] = len(body)
