@@ -20,8 +20,6 @@ func main() {
 	    log.Println("Usage: %s URL", filepath.Base(os.Args[0]))
 	}
 	
-	var err error
-	
 	client := &http.Client{
 		Timeout: 5 * time.Second,
 		Transport: &http.Transport{
