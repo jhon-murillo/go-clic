@@ -42,7 +42,7 @@ func main() {
 	
 	    wg.Add(1)	
 		
-	    go func(rawUrl) {
+	    go func(rawUrl string) {
 	    
 	    	defer wg.Done()
 		
