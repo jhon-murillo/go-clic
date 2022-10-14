@@ -63,6 +63,6 @@ func main() {
 	    
 	    }(rawUrl)
 	}
-	defer resp.Body.Close()
+	//defer resp.Body.Close()
 	wg.Wait()
 }
