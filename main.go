@@ -10,6 +10,7 @@ import (
 	"net/url"
 	"time"
 	"io"
+	"sync"
 	
 )
 
@@ -35,21 +36,33 @@ func main() {
 			},
 		}
 	
+	var wg sync.WaitGroup
+	
 	for _, rawUrl := range os.Args[1:] {
-	    u, err = url.ParseRequestURI(rawUrl)
-            resp, err = client.Get(u.String())
-	    if err != nil {
-	        panic(err)
-	    }
-	    if resp.StatusCode != http.StatusOK {
-	        log.Println (u.String(), "Status code: ", resp.StatusCode)
-	    }
-	    body, err := io.ReadAll(resp.Body) 
-	    if err != nil {
-	        panic(err)
-	    }
-            size = len(body)
-	    log.Println(u , size)
+	
+	    wg.Add(1)	
+		
+	    go func(rawUrl) {
+	    
+	    	defer wg.Done()
+		
+	        u, err = url.ParseRequestURI(rawUrl)
+                resp, err = client.Get(u.String())
+	        if err != nil {
+	            panic(err)
+	        }
+	        if resp.StatusCode != http.StatusOK {
+	            log.Println (u.String(), "Status code: ", resp.StatusCode)
+	        }
+	        body, err := io.ReadAll(resp.Body) 
+	        if err != nil {
+	            panic(err)
+	        }
+                size = len(body)
+	        log.Println(u , size)
+	    
+	    }(rawUrl)
 	}
 	defer resp.Body.Close()
+	wg.Wait()
 }
