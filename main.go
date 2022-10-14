@@ -70,6 +70,7 @@ func main() {
 		
 	    keys = append(keys, rawUrl)	
 	}
+	
 	wg.Wait()
 	
 	sort.SliceStable(keys, func(i, j int) bool{
@@ -79,6 +80,5 @@ func main() {
 	for _, k := range keys{
         	log.Println(k, m[k])
     	}
-	
-	defer resp.Body.Close()
+
 }
