@@ -59,7 +59,6 @@ func main() {
 	        if err != nil {
 	            panic(err)
 	        }
-                size := len(body)
 		
 		mutex.Lock()    
 		m[rawUrl] = len(body)
