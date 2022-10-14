@@ -11,8 +11,6 @@ import (
 	"time"
 	"io"
 	"sync"
-	"sort"
-	
 )
 
 func main() {
@@ -58,7 +56,7 @@ func main() {
                 size := len(body)
 	        log.Println(u , size)
 	    
-	    }(rawUrl, size)
+	    }(rawUrl)
 	}
 	wg.Wait()
 }
