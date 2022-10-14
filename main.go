@@ -31,6 +31,7 @@ func main() {
 		}
 	
 	var wg sync.WaitGroup
+	var mutex sync.Mutex
 	
 	n := len(os.Args[1:])
 	keys := make([]string, 0, n)
@@ -59,8 +60,14 @@ func main() {
 	        }
                 size := len(body)
 	        log.Println(u , size)
+		
+		mutex.Lock()    
+		m[rawUrl] = len(body)
+		mutex.Unlock()
 	    
 	    }(rawUrl)
+		
+	    keys = append(keys, rawUrl)	
 	}
 	wg.Wait()
 }
